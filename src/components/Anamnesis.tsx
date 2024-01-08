@@ -2,87 +2,44 @@ import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select, {SelectChangeEvent} from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
 import Grid from '@mui/material/Unstable_Grid2';
-import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import {
-    setAllergy,
-    setAstma,
-    setBrux,
-    setCompl,
-    setExper, setFacecompl,
-    setNsaid, setResp,
-    setSource,
-    setSport
-} from "../store/anamnesisSlice.ts";
+import {setField} from "../store/anamnesisSlice.ts";
+import {useAppDispatch, useAppSelector} from "../store/hooks.ts";
+import React from "react";
+
 
 export default function Anamnesis() {
 
-    const [age, setAge] = React.useState('0');
+    // const dispatch = useDispatch();
+    // const anamnesisState = useSelector(state => state.anamnesis);
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setAge(event.target.value);
+    const dispatch = useAppDispatch()
+    const anamnesisState = useAppSelector(s => s.anamnesis)
+
+    const handleUpdateSelectField = (event: SelectChangeEvent<number>) => {
+        const {name, value} = event.target;
+        dispatch(setField({field: name, value: Number(value)}));
     };
 
- const dispatch = useDispatch();
- const anamnesisState = useSelector(state => state.anamnesis);
+    const handleUpdateSwitchField = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const {name, checked} = event.target;
+        dispatch(setField({field: name, value: checked ? 1 : 0}));
+    };
 
-
-
- const handleChangeSource = (event) => {
-   dispatch(setSource(event.target.value));
- };
-
-  const handleChangeExper = (event) => {
-   dispatch(setExper(event.target.value));
- };
-
-  const handleChangeCompl = (event) => {
-   dispatch(setCompl(event.target.value));
- };
-
-  const handleChangeAllergy = (event) => {
-   dispatch(setAllergy(event.target.value));
- };
-
-  const handleChangeNsaid = (event) => {
-   dispatch(setNsaid(event.target.checked?1:0));
- };
-
-  const handleChangeAstma = (event) => {
-   dispatch(setAstma(event.target.checked?1:0));
- };
-
-  const handleChangeSport = (event) => {
-   dispatch(setSport(event.target.checked?1:0));
- };
-
-  const handleChangeBrux = (event) => {
-   dispatch(setBrux(event.target.value));
- };
-
-  const handleChangeResp = (event) => {
-   dispatch(setResp(event.target.value));
- };
-
-  const handleChangeFacecompl = (event) => {
-   dispatch(setFacecompl(event.target.value));
- };
-
- // Similar handlers for other fields...
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            < Grid container spacing={2} >
+        <Box sx={{flexGrow: 1}}>
+            <Grid container spacing={2}>
                 <Grid xs={5}>
                     От кого пациент узнал про клинику или кем направлен</Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
+                            name='source'
                             value={anamnesisState.source}
-                            onChange={handleChangeSource}
+                            onChange={handleUpdateSelectField}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>От стоатолога внешнего</MenuItem>
@@ -98,10 +55,11 @@ export default function Anamnesis() {
                     Есть ли опыт консультаций уже по данному вопросу
                 </Grid>
                 <Grid xs={5}>
-                <FormControl fullWidth>
+                    <FormControl fullWidth>
                         <Select
+                            name='exper'
                             value={anamnesisState.exper}
-                            onChange={handleChangeExper}
+                            onChange={handleUpdateSelectField}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет, первый раз</MenuItem>
@@ -117,10 +75,11 @@ export default function Anamnesis() {
                     Основная жалоба и мотивация скорее
                 </Grid>
                 <Grid xs={5}>
-                <FormControl fullWidth>
+                    <FormControl fullWidth>
                         <Select
+                            name='compl'
                             value={anamnesisState.compl}
-                            onChange={handleChangeCompl}
+                            onChange={handleUpdateSelectField}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Эстетическая</MenuItem>
@@ -135,10 +94,11 @@ export default function Anamnesis() {
                     Аллергия на металлы в анамнезе
                 </Grid>
                 <Grid xs={5}>
-                <FormControl fullWidth>
+                    <FormControl fullWidth>
                         <Select
+                            name='allergy'
                             value={anamnesisState.allergy}
-                            onChange={handleChangeAllergy}
+                            onChange={handleUpdateSelectField}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет</MenuItem>
@@ -151,29 +111,42 @@ export default function Anamnesis() {
                     Регулярный прием НПВС, кортикостероидов
                 </Grid>
                 <Grid xs={5}>
-                <FormControlLabel control={<Switch checked={anamnesisState.nsaid?true:false} onChange={handleChangeNsaid} />} label="Да" />
+                    <FormControlLabel
+                        name='nsaid'
+                        control={<Switch checked={anamnesisState.nsaid ? true : false}
+                                         onChange={handleUpdateSwitchField}/>}
+                        label="Да"/>
                 </Grid>
                 <Grid xs={5}>
                     Прием препаратов от бронхиальной астмы
                 </Grid>
                 <Grid xs={5}>
-                <FormControlLabel control={<Switch checked={anamnesisState.astma?true:false} onChange={handleChangeAstma} />} label="Да" />
+                    <FormControlLabel
+                        name='astma'
+                        control={<Switch checked={anamnesisState.astma ? true : false}
+                                         onChange={handleUpdateSwitchField}/>}
+                        label="Да"/>
                 </Grid>
 
                 <Grid xs={5}>
                     Контактные виды спорта с риском травмы
                 </Grid>
                 <Grid xs={5}>
-                <FormControlLabel control={<Switch checked={anamnesisState.sport?true:false} onChange={handleChangeSport} />} label="Да" />
+                    <FormControlLabel
+                        name='sport'
+                        control={<Switch checked={anamnesisState.sport ? true : false}
+                                         onChange={handleUpdateSwitchField}/>}
+                        label="Да"/>
                 </Grid>
                 <Grid xs={5}>
                     Бруксизм или (и) привычка сжимать зубы при стрессе
                 </Grid>
                 <Grid xs={5}>
-                <FormControl fullWidth>
+                    <FormControl fullWidth>
                         <Select
+                            name='brux'
                             value={anamnesisState.brux}
-                            onChange={handleChangeBrux}
+                            onChange={handleUpdateSelectField}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет</MenuItem>
@@ -186,10 +159,11 @@ export default function Anamnesis() {
                     Значимые хронические нарушения носового дыхания
                 </Grid>
                 <Grid xs={5}>
-                <FormControl fullWidth>
+                    <FormControl fullWidth>
                         <Select
+                            name='resp'
                             value={anamnesisState.resp}
-                            onChange={handleChangeResp}
+                            onChange={handleUpdateSelectField}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет</MenuItem>
@@ -202,10 +176,11 @@ export default function Anamnesis() {
                     Значимое недовольство эстетикой лица
                 </Grid>
                 <Grid xs={5}>
-                <FormControl fullWidth>
+                    <FormControl fullWidth>
                         <Select
+                            name='facecompl'
                             value={anamnesisState.facecompl}
-                            onChange={handleChangeFacecompl}
+                            onChange={handleUpdateSelectField}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет</MenuItem>
@@ -214,7 +189,7 @@ export default function Anamnesis() {
                         </Select>
                     </FormControl>
                 </Grid>
-            </Grid >
+            </Grid>
         </Box>
     )
 

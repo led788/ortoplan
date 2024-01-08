@@ -17,7 +17,7 @@ interface TabPanelProps {
 }
 
 function CustomTabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
+    const {children, value, index, ...other} = props;
 
     return (
         <div
@@ -28,8 +28,8 @@ function CustomTabPanel(props: TabPanelProps) {
             {...other}
         >
             {value === index && (
-                <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
+                <Box sx={{p: 3}}>
+                    <Typography component={'span'}>{children}</Typography>
                 </Box>
             )}
         </div>
@@ -48,16 +48,16 @@ export default function Step1() {
 
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
-        console.log(newValue)
     };
 
     return (
 
-        <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Box sx={{width: '100%'}}>
+            <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
                 <AppBar position="static">
-                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" indicatorColor="secondary"
-                        textColor="inherit">
+                    <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"
+                          indicatorColor="secondary"
+                          textColor="inherit">
                         <Tab label="ЖАЛОБЫ и АНАМНЕЗ" {...a11yProps(0)} />
                         <Tab label="ЛИЦЕВЫЕ ПРИЗНАКИ и РОСТ" {...a11yProps(1)} />
                         <Tab label="ЭСТЕТИКА УЛЫБКИ и ДИСПЛЕЯ" {...a11yProps(2)} />
@@ -68,21 +68,20 @@ export default function Step1() {
             </Box>
 
             <CustomTabPanel value={value} index={0}>
-                <Anamnesis />
+                <Anamnesis/>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-                <Face />
+                <Face/>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-                <Smile />
+                <Smile/>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={3}>
-                <Tmj />
+                <Tmj/>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={4}>
-                <Other />
+                <Other/>
             </CustomTabPanel>
         </Box>
-
     );
 }
