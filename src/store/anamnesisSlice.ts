@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-const initialState = {
 
+const initialState = {
     source: 0,
     exper: 0,
     compl: 4,
@@ -12,8 +12,10 @@ const initialState = {
     brux: 0,
     resp: 0,
     facecompl: 1,
-
 };
+
+type IState = typeof initialState;
+export type StateFields = keyof IState;
 
 const anamnesisSlice = createSlice({
     name: 'anamnesis',

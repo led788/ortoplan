@@ -5,27 +5,24 @@ import MenuItem from '@mui/material/MenuItem';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
 import Grid from '@mui/material/Unstable_Grid2';
-import {setField} from "../store/anamnesisSlice.ts";
+import {setField, StateFields} from "../store/anamnesisSlice.ts";
 import {useAppDispatch, useAppSelector} from "../store/hooks.ts";
 import React from "react";
 
 
 export default function Anamnesis() {
 
-    // const dispatch = useDispatch();
-    // const anamnesisState = useSelector(state => state.anamnesis);
-
     const dispatch = useAppDispatch()
     const anamnesisState = useAppSelector(s => s.anamnesis)
 
     const handleUpdateSelectField = (event: SelectChangeEvent<number>) => {
         const {name, value} = event.target;
-        dispatch(setField({field: name, value: Number(value)}));
+        dispatch(setField({field: name as StateFields, value: Number(value)}));
     };
 
     const handleUpdateSwitchField = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {name, checked} = event.target;
-        dispatch(setField({field: name, value: checked ? 1 : 0}));
+        dispatch(setField({field: name as StateFields, value: checked ? 1 : 0}));
     };
 
 
