@@ -1,42 +1,49 @@
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Slider from '@mui/material/Slider';
-import Tooltip from '@mui/material/Tooltip';
+import Select, {SelectChangeEvent} from '@mui/material/Select';
 import Grid from '@mui/material/Unstable_Grid2';
-import React from 'react';
+import {useAppDispatch, useAppSelector} from "../store/hooks.ts";
+import {setField, StateFields} from "../store/tmjSlice.ts";
+import Slider from "@mui/material/Slider";
 
 export default function Tmj() {
 
-    const [age, setAge] = React.useState('0');
+    const dispatch = useAppDispatch()
+    const tmjState = useAppSelector(s => s.tmj)
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setAge(event.target.value);
+    const handleUpdateSelectField = (event: SelectChangeEvent<number>) => {
+        const {name, value} = event.target;
+        dispatch(setField({field: name as StateFields, value: Number(value)}));
     };
 
-    const [value, setValue] = React.useState<number>(0);
-
-    const handleChange2 = (event: Event, newValue: number | number[]) => {
+    const handleUpdateSliderField = (_event: Event, newValue: number | number[]) => {
         if (typeof newValue === 'number') {
-            setValue(newValue);
+            dispatch(setField({field: 'open', value: Number(newValue)}));
         }
     };
 
     function valuetext(value: number) {
         return `${value} мм`;
-      }    
+    }
+
+    const styles = {
+        background: '#fff2cc',
+    }
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            < Grid container spacing={2} >
+        <Box sx={{flexGrow: 1}}>
+            < Grid container spacing={2}>
+
                 <Grid xs={5}>
                     ВНЧС жалобы в анамнезе</Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name='tmjcomplaint'
+                            value={tmjState.tmjcomplaint}
+                            onChange={handleUpdateSelectField}
+                            sx={tmjState.tmjcomplaint ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет проблем</MenuItem>
@@ -48,12 +55,14 @@ export default function Tmj() {
                     </FormControl>
                 </Grid>
                 <Grid xs={5}>
-                Боли</Grid>
+                    Боли</Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name ='pain'
+                            value={tmjState.pain}
+                            onChange={handleUpdateSelectField}
+                            sx={tmjState.pain ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет</MenuItem>
@@ -64,13 +73,15 @@ export default function Tmj() {
                     </FormControl>
                 </Grid>
                 <Grid xs={5}>
-                Смещение центра при открывании, разговоре
+                    Смещение центра при открывании, разговоре
                 </Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name ='mdbdev'
+                            value={tmjState.mdbdev}
+                            onChange={handleUpdateSelectField}
+                            sx={tmjState.mdbdev ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет</MenuItem>
@@ -80,13 +91,15 @@ export default function Tmj() {
                     </FormControl>
                 </Grid>
                 <Grid xs={5}>
-                Щелчки справа при открывании и закрывании
+                    Щелчки справа при открывании и закрывании
                 </Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name ='clicksr'
+                            value={tmjState.clicksr}
+                            onChange={handleUpdateSelectField}
+                            sx={tmjState.clicksr ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет щелчка справа</MenuItem>
@@ -98,13 +111,15 @@ export default function Tmj() {
                     </FormControl>
                 </Grid>
                 <Grid xs={5}>
-                Щелчки слева при открывании и закрывании 
+                    Щелчки слева при открывании и закрывании
                 </Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name ='clicksl'
+                            value={tmjState.clicksl}
+                            onChange={handleUpdateSelectField}
+                            sx={tmjState.clicksl ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет щелчка слева</MenuItem>
@@ -116,18 +131,17 @@ export default function Tmj() {
                     </FormControl>
                 </Grid>
                 <Grid xs={5}>
-                Величина максимального открывания рта (мм)
+                    Величина максимального открывания рта (мм)
                 </Grid>
                 <Grid xs={5}>
-                    <Box sx={{ maxWidth: true}}>
+                    <Box sx={{width: 450}}>
                         <Slider
-                            // value={value}
-
+                            value={tmjState.open}
                             defaultValue={40}
                             getAriaValueText={valuetext}
-                            // onChange={handleChange2}
+                            onChange={handleUpdateSliderField}
                             size="small"
-                            step={1}
+                            step={5}
                             min={0}
                             max={60}
                             valueLabelDisplay="on"
@@ -137,13 +151,15 @@ export default function Tmj() {
                 </Grid>
 
                 <Grid xs={5}>
-                По КТ ВНЧС в ЦО справа 
+                    По КТ ВНЧС в ЦО справа
                 </Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name ='condrct'
+                            value={tmjState.condrct}
+                            onChange={handleUpdateSelectField}
+                            sx={tmjState.condrct ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Мыщелок справа в норм. положении</MenuItem>
@@ -154,15 +170,17 @@ export default function Tmj() {
                             <MenuItem value={6}>Нет КТ сустава в ЦО</MenuItem>
                         </Select>
                     </FormControl>
-                </Grid>                
+                </Grid>
                 <Grid xs={5}>
-                По КТ ВНЧС в ЦО слева
+                    По КТ ВНЧС в ЦО слева
                 </Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name ='condlct'
+                            value={tmjState.condlct}
+                            onChange={handleUpdateSelectField}
+                            sx={tmjState.condlct ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Мыщелок слева в норм. положении</MenuItem>
@@ -173,15 +191,17 @@ export default function Tmj() {
                             <MenuItem value={6}>Нет КТ сустава в ЦО</MenuItem>
                         </Select>
                     </FormControl>
-                </Grid>                
+                </Grid>
                 <Grid xs={5}>
-                Признаки активной резорбции мыщелков на КТ
+                    Признаки активной резорбции мыщелков на КТ
                 </Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name ='condresorpt'
+                            value={tmjState.condresorpt}
+                            onChange={handleUpdateSelectField}
+                            sx={tmjState.condresorpt ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Активной резорбции мыщелков нет</MenuItem>
@@ -191,8 +211,8 @@ export default function Tmj() {
                             <MenuItem value={5}>Нет КТ сустава</MenuItem>
                         </Select>
                     </FormControl>
-                </Grid>                
-            </Grid >
+                </Grid>
+            </Grid>
         </Box>
     )
 

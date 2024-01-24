@@ -2,41 +2,46 @@ import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import MenuItem from '@mui/material/MenuItem';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select, {SelectChangeEvent} from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
 import Grid from '@mui/material/Unstable_Grid2';
 import React from 'react';
+import {setField, StateFields} from "../store/otherSlice.ts";
+import {useAppDispatch, useAppSelector} from "../store/hooks.ts";
+// import DentalMapToggleButtons from "./DentalMapToggleButtons.tsx";
+import ToothList from "./ToothList.tsx";
 
 export default function Other() {
 
-    const [age, setAge] = React.useState('0');
+    const dispatch = useAppDispatch()
+    const otherState = useAppSelector(s => s.other)
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setAge(event.target.value);
+    const handleUpdateSelectField = (event: SelectChangeEvent<number>) => {
+        const {name, value} = event.target;
+        dispatch(setField({field: name as StateFields, value: Number(value)}));
     };
 
-    const [value, setValue] = React.useState<number>(0);
-
-    const handleChange2 = (event: Event, newValue: number | number[]) => {
-        if (typeof newValue === 'number') {
-            setValue(newValue);
-        }
+    const handleUpdateSwitchField = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const {name, checked} = event.target;
+        dispatch(setField({field: name as StateFields, value: checked ? 1 : 0}));
     };
 
-    function valuetext(value: number) {
-        return `${value} мм`;
-      }    
+    const styles = {
+        background: '#fff2cc',
+    }
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            < Grid container spacing={2} >
+        <Box sx={{flexGrow: 1}}>
+            < Grid container spacing={2}>
                 <Grid xs={5}>
-                Глубина резцового перекрытия</Grid>
+                    Глубина резцового перекрытия</Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name='overbite'
+                            value={otherState.overbite}
+                            onChange={handleUpdateSelectField}
+                            sx={otherState.overbite ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нормальная</MenuItem>
@@ -46,12 +51,14 @@ export default function Other() {
                     </FormControl>
                 </Grid>
                 <Grid xs={5}>
-                Шпее низ</Grid>
+                    Шпее низ</Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name='spee'
+                            value={otherState.spee}
+                            onChange={handleUpdateSelectField}
+                            sx={otherState.spee ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Плоская</MenuItem>
@@ -61,13 +68,15 @@ export default function Other() {
                     </FormControl>
                 </Grid>
                 <Grid xs={5}>
-                Положение верхних 7 относительно 6 по вертикали
+                    Положение верхних 7 относительно 6 по вертикали
                 </Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name='seventosix'
+                            value={otherState.seventosix}
+                            onChange={handleUpdateSelectField}
+                            sx={otherState.seventosix ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет перепада более 1 мм нигде</MenuItem>
@@ -78,13 +87,15 @@ export default function Other() {
                     </FormControl>
                 </Grid>
                 <Grid xs={5}>
-                Перекрестное соотношение справа
+                    Перекрестное соотношение справа
                 </Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name='crossr'
+                            value={otherState.crossr}
+                            onChange={handleUpdateSelectField}
+                            sx={otherState.crossr ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Перекреста справа нет</MenuItem>
@@ -94,13 +105,15 @@ export default function Other() {
                     </FormControl>
                 </Grid>
                 <Grid xs={5}>
-                Перекрестное соотношение слева
+                    Перекрестное соотношение слева
                 </Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name='crossl'
+                            value={otherState.crossl}
+                            onChange={handleUpdateSelectField}
+                            sx={otherState.crossl ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Перекреста слева нет</MenuItem>
@@ -110,14 +123,92 @@ export default function Other() {
                     </FormControl>
                 </Grid>
 
+                {/*Intrusion*/}
+                {/*Impact*/}
+                {/*Supernum*/}
+                {/*Root_Res*/}
+                {/*Root_Res_Risk*/}
+                {/*Rot-Rec*/}
+
+
                 <Grid xs={5}>
-                ВЧ пазухи на КТ или панорамном снимке
+                    Отдельные зубы, требующие интрузии
+                </Grid>
+                <Grid xs={5}>
+
+                </Grid>
+
+                <Grid xs={5}>
+                    Ретенированные зубы кроме 8
+                </Grid>
+                <Grid xs={5}>
+
+                </Grid>
+
+                <Grid xs={5}>
+                    Сверхкомплектные зубы
+                </Grid>
+                <Grid xs={5}>
+
+                </Grid>
+
+
+                <Grid xs={5}>
+                    Зубы с резорбцией корней до лечения
+                </Grid>
+                <Grid xs={5}>
+
+                </Grid>
+
+
+                <Grid xs={5}>
+                    Риск резорбции корней (коротк., тонкие, изогнут.)
+                </Grid>
+                <Grid xs={5}>
+
+                </Grid>
+
+
+                <Grid xs={5}>
+                    Ротиров. зубы с дефиц. кости (риск рецессий)
+                </Grid>
+                <Grid xs={5}>
+
+                </Grid>
+
+
+                <Grid xs={5}>
+                    Парафункция языка (дизокклюзии)
+                </Grid>
+                <Grid xs={5}>
+                    <FormControlLabel
+                        name='tongue'
+                        control={<Switch checked={otherState.tongue ? true : false}
+                                         onChange={handleUpdateSwitchField}/>}
+                        label="Да"/>
+                </Grid>
+
+                <Grid xs={5}>
+                    Признаки анкилоза (инфра, депульпированные)
+                </Grid>
+                <Grid xs={5}>
+                    <FormControlLabel
+                        name='ankylos'
+                        control={<Switch checked={otherState.ankylos ? true : false}
+                                         onChange={handleUpdateSwitchField}/>}
+                        label="Да"/>
+                </Grid>
+
+                <Grid xs={5}>
+                    ВЧ пазухи на КТ или панорамном снимке
                 </Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name='sinus'
+                            value={otherState.sinus}
+                            onChange={handleUpdateSelectField}
+                            sx={otherState.sinus ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нормальные с обеих сторон</MenuItem>
@@ -127,15 +218,18 @@ export default function Other() {
                             <MenuItem value={5}>Не видно пазух на снимке</MenuItem>
                         </Select>
                     </FormControl>
-                </Grid>                
+                </Grid>
+
                 <Grid xs={5}>
-                Биотип десны в переднем нижнем отделе
+                    Биотип десны в переднем нижнем отделе
                 </Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
-                            value={age}
-                            onChange={handleChange}
+                            name='biotype'
+                            value={otherState.biotype}
+                            onChange={handleUpdateSelectField}
+                            sx={otherState.biotype ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Биотип средний</MenuItem>
@@ -143,14 +237,30 @@ export default function Other() {
                             <MenuItem value={3}>Биотип толстый</MenuItem>
                         </Select>
                     </FormControl>
-                </Grid>                
+                </Grid>
+
                 <Grid xs={5}>
-                Требуется реставрац. боковых зубов по анатомии
+                    Требуется реставрац. боковых зубов по анатомии
                 </Grid>
                 <Grid xs={5}>
-                <FormControlLabel control={<Switch />} label="Да" />
-                </Grid>                
-            </Grid >
+                    <FormControlLabel
+                        name='postrestor'
+                        control={<Switch checked={otherState.postrestor ? true : false}
+                                         onChange={handleUpdateSwitchField}/>}
+                        label="Да"/>
+                </Grid>
+
+                <Grid xs={5}>
+                    Зубы, требующие эндодонтического лечения
+                </Grid>
+                <Grid xs={5}>
+                    <ToothList/>
+
+                    {/*<DentalMapToggleButtons />*/}
+                </Grid>
+
+
+            </Grid>
         </Box>
     )
 

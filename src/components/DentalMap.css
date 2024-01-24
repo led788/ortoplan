@@ -1,0 +1,11 @@
+/*.mapGroup:hover{*/
+/*    background: red;*/
+/*}*/
+
+.mapGroup{
+    background: #ffcccc;
+}
+
+ToggleButton.mapGroup{
+    background: #ffcccc;
+}

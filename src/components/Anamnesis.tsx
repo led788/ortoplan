@@ -25,21 +25,26 @@ export default function Anamnesis() {
         dispatch(setField({field: name as StateFields, value: checked ? 1 : 0}));
     };
 
+    const styles = {
+        background: '#fff2cc',
+    }
 
     return (
         <Box sx={{flexGrow: 1}}>
             <Grid container spacing={2}>
                 <Grid xs={5}>
-                    От кого пациент узнал про клинику или кем направлен</Grid>
+                    От кого пациент узнал про клинику или кем направлен
+                </Grid>
                 <Grid xs={5}>
                     <FormControl fullWidth>
                         <Select
                             name='source'
                             value={anamnesisState.source}
                             onChange={handleUpdateSelectField}
+                            sx={anamnesisState.source ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
-                            <MenuItem value={1}>От стоатолога внешнего</MenuItem>
+                            <MenuItem value={1}>От стоматолога внешнего</MenuItem>
                             <MenuItem value={2}>От стоматолога нашего</MenuItem>
                             <MenuItem value={3}>От ортодонта внешнего</MenuItem>
                             <MenuItem value={4}>От другого пациента</MenuItem>
@@ -57,6 +62,7 @@ export default function Anamnesis() {
                             name='exper'
                             value={anamnesisState.exper}
                             onChange={handleUpdateSelectField}
+                            sx={anamnesisState.exper ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет, первый раз</MenuItem>
@@ -77,6 +83,7 @@ export default function Anamnesis() {
                             name='compl'
                             value={anamnesisState.compl}
                             onChange={handleUpdateSelectField}
+                            sx={anamnesisState.compl ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Эстетическая</MenuItem>
@@ -96,6 +103,7 @@ export default function Anamnesis() {
                             name='allergy'
                             value={anamnesisState.allergy}
                             onChange={handleUpdateSelectField}
+                            sx={anamnesisState.allergy ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет</MenuItem>
@@ -144,6 +152,7 @@ export default function Anamnesis() {
                             name='brux'
                             value={anamnesisState.brux}
                             onChange={handleUpdateSelectField}
+                            sx={anamnesisState.brux ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет</MenuItem>
@@ -161,6 +170,7 @@ export default function Anamnesis() {
                             name='resp'
                             value={anamnesisState.resp}
                             onChange={handleUpdateSelectField}
+                            sx={anamnesisState.resp ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет</MenuItem>
@@ -178,6 +188,7 @@ export default function Anamnesis() {
                             name='facecompl'
                             value={anamnesisState.facecompl}
                             onChange={handleUpdateSelectField}
+                            sx={anamnesisState.facecompl ? {} : styles}
                         >
                             <MenuItem value={0}>Не заполнен</MenuItem>
                             <MenuItem value={1}>Нет</MenuItem>

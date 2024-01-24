@@ -43,6 +43,7 @@ function a11yProps(index: number) {
     };
 }
 
+
 export default function Step1() {
     const [value, setValue] = React.useState(0);
 
@@ -54,7 +55,7 @@ export default function Step1() {
 
         <Box sx={{width: '100%'}}>
             <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
-                <AppBar position="static">
+                <AppBar position="static" color={"primary"}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"
                           indicatorColor="secondary"
                           textColor="inherit">
