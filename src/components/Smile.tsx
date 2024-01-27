@@ -10,6 +10,7 @@ import {useAppDispatch, useAppSelector} from "../store/hooks.ts";
 import {setField, setFieldBolton, StateFields} from "../store/smileSlice.ts";
 import {NumericFormat} from 'react-number-format';
 import HelpCenterOutlinedIcon from '@mui/icons-material/HelpCenterOutlined';
+
 export default function Smile() {
 
     const dispatch = useAppDispatch()
@@ -300,7 +301,9 @@ export default function Smile() {
 
                 <Grid xs={5}>
                     Индекс Болтона для передних зубов
-                    <Tooltip title="Число в диапазоне от 0 до 2, точность - 3 знака после запятой"><HelpCenterOutlinedIcon fontSize={'medium'}/></Tooltip>
+                    <Tooltip
+                        title="Число в диапазоне от 0 до 2, точность - 3 знака после запятой"><HelpCenterOutlinedIcon
+                        fontSize={'medium'}/></Tooltip>
                 </Grid>
                 <Grid xs={5}>
 
@@ -324,9 +327,11 @@ export default function Smile() {
 
                     <NumericFormat
                         value={smileState.bolton}
-                        customInput={TextField}
+                        // customInput={TextField}
+                        customInput={CustomTextField}
                         onValueChange={(values, sourceInfo) => {
                             dispatch(setFieldBolton({field: 'bolton', value: values.floatValue}));
+                            console.log('bolton:', values.floatValue)
                         }}
                         allowNegative={false}
                         decimalScale={1}
@@ -343,4 +348,14 @@ export default function Smile() {
         </Box>
     )
 
+}
+
+
+const CustomTextField = (inputProps: any) => {
+    return (
+        <TextField
+            {...inputProps}
+            title='dsdd'
+        />
+    )
 }

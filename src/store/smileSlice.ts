@@ -28,7 +28,7 @@ const smileSlice = createSlice({
         },
 
         setFieldBolton: (state, action: PayloadAction<{ field: keyof typeof state, value: string }>) => {
-            state[action.payload.field] = action.payload.value;
+            state[action.payload.field] = parseFloat(action.payload.value);
         },
     },
 });

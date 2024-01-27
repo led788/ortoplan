@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Step1 from './components/Step1'
-import Login from './components/Login'
+import Login from './components/Login.tsx'
 
 function App() {
   return (

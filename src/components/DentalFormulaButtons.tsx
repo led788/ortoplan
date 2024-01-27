@@ -15,7 +15,7 @@ interface IToothListModalProps {
     setVal: (newValue: Array<number>, fieldName:string) => void;
 }
 
-export default function DentalMapToggleButtons({value, field, setVal}: IToothListModalProps) {
+export default function DentalFormulaButtons({value, field, setVal}: IToothListModalProps) {
     // const [tooth, setTooth] = React.useState<Array<number> | null>();
 
     const handleToggle = (
@@ -26,8 +26,8 @@ export default function DentalMapToggleButtons({value, field, setVal}: IToothLis
         setVal(newTooth, field)
     };
     return (
-        <Stack spacing={2}>
-            <Stack spacing={2} direction='row'>
+        <Stack spacing={2}  alignItems="center">
+            <Stack spacing={5} direction='row'>
                 <ToggleButtonGroup
                     value={value}
                     onChange={handleToggle}
@@ -107,83 +107,6 @@ export default function DentalMapToggleButtons({value, field, setVal}: IToothLis
 
             </Stack>
 
-            {/*bottom jaw*/}
-            <Stack spacing={2} direction='row'>
-                <ToggleButtonGroup
-                    value={value}
-                    onChange={handleToggle}
-                    aria-label=""
-                    color='error'
-                    size='small'
-
-                >
-                    <StyledToggleButton value="48">
-                        48
-                    </StyledToggleButton>
-                    <StyledToggleButton value="47">
-                        47
-                    </StyledToggleButton>
-                    <StyledToggleButton value="46">
-                        46
-                    </StyledToggleButton>
-                    <StyledToggleButton value="45">
-                        45
-                    </StyledToggleButton>
-
-                    <StyledToggleButton value="44">
-                        44
-                    </StyledToggleButton>
-
-                    <StyledToggleButton value="43">
-                        43
-                    </StyledToggleButton>
-
-                    <StyledToggleButton value="42">
-                        42
-                    </StyledToggleButton>
-                    <StyledToggleButton value="41">
-                        41
-                    </StyledToggleButton>
-                </ToggleButtonGroup>
-                {/*<Divider orientation="vertical" sx={{mx: 1, my: 0.5}}/>*/}
-                <ToggleButtonGroup
-                    value={value}
-                    onChange={handleToggle}
-                    aria-label=""
-                    color='error'
-                    size='small'
-                    className='mapGroup'>
-
-                    <StyledToggleButton value="31">
-                        31
-                    </StyledToggleButton>
-                    <StyledToggleButton value="32">
-                        32
-                    </StyledToggleButton>
-                    <StyledToggleButton value="33">
-                        33
-                    </StyledToggleButton>
-                    <StyledToggleButton value="34">
-                        34
-                    </StyledToggleButton>
-
-                    <StyledToggleButton value="35">
-                        35
-                    </StyledToggleButton>
-
-                    <StyledToggleButton value="36">
-                        36
-                    </StyledToggleButton>
-
-                    <StyledToggleButton value="37">
-                        37
-                    </StyledToggleButton>
-                    <StyledToggleButton value="38">
-                        38
-                    </StyledToggleButton>
-                </ToggleButtonGroup>
-
-            </Stack>
         </Stack>
     )
 }

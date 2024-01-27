@@ -8,14 +8,12 @@ const initialState = {
     crossr: 1,
     crossl: 1,
 
-    //dental records
     intrusion: [],
     impact: [],
     supernum: [],
     rootres: [],
     rootresrisk: [],
     rotrec: [],
-    //
 
     tongue: 1,
     ankylos: 1,
@@ -23,10 +21,51 @@ const initialState = {
     biotype: 1,
     postrestor: 1,
 
-    //dental records
-    endo: []
+    endo: [],
+
+    //dental formula
+    impnow_up: [],
+    extu_up: [],
+    extspace_up: [],
+
+    impnow_down: [],
+    extu_down: [],
+    extspace_down: [],
+
     //
 
+};
+
+type NumberFields = {
+    overbite: number;
+    spee: number;
+    seventosix: number;
+    crossr: number;
+    crossl: number;
+    tongue: number;
+    ankylos: number;
+    sinus: number;
+    biotype: number;
+    postrestor: number;
+};
+
+type ArrayFields = {
+    intrusion: Array<number>;
+    impact: Array<number>;
+    supernum: Array<number>;
+    rootres: Array<number>;
+    rootresrisk: Array<number>;
+    rotrec: Array<number>;
+    endo: Array<number>;
+
+    // dental formula
+    impnow_up: Array<number>;
+    extu_up: Array<number>;
+    extspace_up: Array<number>;
+
+    impnow_down: Array<number>;
+    extu_down: Array<number>;
+    extspace_down: Array<number>;
 };
 
 type IState = typeof initialState;
@@ -36,41 +75,17 @@ const otherSlice = createSlice({
     name: 'other',
     initialState,
     reducers: {
-        // setField: (state, action: PayloadAction<{ field: keyof typeof state, value: number }>) => {
-        //     state[action.payload.field] = action.payload.value;
-        // },
 
-        // setField: (state, action: PayloadAction<{ field: keyof typeof state, value: number | Array<number> }>) => {
-        //     state[action.payload.field] = Array.isArray(state[action.payload.field]) ? action.payload.value : Number(action.payload.value);
-        // },
-
-        // setField: (state, action: PayloadAction<{ field: keyof typeof state, value: number | Array<number> }>) => {
-        //     if (Array.isArray(state[action.payload.field])) {
-        //         return {
-        //             ...state,
-        //             [action.payload.field]: action.payload.value
-        //         };
-        //     } else {
-        //         state[action.payload.field] = Number(action.payload.value);
-        //     }
-        // },
-
-        setArrayField: (state, action: PayloadAction<{ field: keyof typeof state, value: Array<number> }>) => {
-            // state[action.payload.field] = action.payload.value;
+        setArrayField: (state, action: PayloadAction<{ field: keyof ArrayFields, value: Array<number> }>) => {
             return {
                 ...state,
                 [action.payload.field]: action.payload.value
             };
         },
 
-        setField: (state, action: PayloadAction<{ field: keyof typeof state, value: number }>) => {
+        setField: (state, action: PayloadAction<{ field: keyof NumberFields, value: number }>) => {
             state[action.payload.field] = action.payload.value;
         },
-
-
-        // setField: (state, action: PayloadAction<{ field: keyof typeof state, value: number }>) => {
-        //     state[action.payload.field] = action.payload.value;
-        // },
 
     }
 });

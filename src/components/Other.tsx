@@ -6,10 +6,11 @@ import Select, {SelectChangeEvent} from '@mui/material/Select';
 import Switch from '@mui/material/Switch';
 import Grid from '@mui/material/Unstable_Grid2';
 import React from 'react';
-import {setField, StateFields} from "../store/otherSlice.ts";
+import {setArrayField, setField, StateFields} from "../store/otherSlice.ts";
 import {useAppDispatch, useAppSelector} from "../store/hooks.ts";
-// import DentalMapToggleButtons from "./DentalMapToggleButtons.tsx";
-import ToothList from "./ToothList.tsx";
+import ToothListModal from "./ToothListModal.tsx";
+import {Divider, Hidden} from "@mui/material";
+import DentalFormulaButtons from "./DentalFormulaButtons.tsx";
 
 export default function Other() {
 
@@ -25,6 +26,11 @@ export default function Other() {
         const {name, checked} = event.target;
         dispatch(setField({field: name as StateFields, value: checked ? 1 : 0}));
     };
+
+    const handleArrayChange = (newValue: Array<number>, fieldName: string) => {
+        dispatch(setArrayField({field: fieldName as StateFields, value: newValue}));
+    }
+
 
     const styles = {
         background: '#fff2cc',
@@ -135,21 +141,33 @@ export default function Other() {
                     Отдельные зубы, требующие интрузии
                 </Grid>
                 <Grid xs={5}>
-
+                    <ToothListModal
+                        value={otherState.intrusion}
+                        field={'intrusion'}
+                        setVal={handleArrayChange}
+                    />
                 </Grid>
 
                 <Grid xs={5}>
                     Ретенированные зубы кроме 8
                 </Grid>
                 <Grid xs={5}>
-
+                    <ToothListModal
+                        value={otherState.impact}
+                        field={'impact'}
+                        setVal={handleArrayChange}
+                    />
                 </Grid>
 
                 <Grid xs={5}>
                     Сверхкомплектные зубы
                 </Grid>
                 <Grid xs={5}>
-
+                    <ToothListModal
+                        value={otherState.supernum}
+                        field={'supernum'}
+                        setVal={handleArrayChange}
+                    />
                 </Grid>
 
 
@@ -157,7 +175,11 @@ export default function Other() {
                     Зубы с резорбцией корней до лечения
                 </Grid>
                 <Grid xs={5}>
-
+                    <ToothListModal
+                        value={otherState.rootres}
+                        field={'rootres'}
+                        setVal={handleArrayChange}
+                    />
                 </Grid>
 
 
@@ -165,7 +187,11 @@ export default function Other() {
                     Риск резорбции корней (коротк., тонкие, изогнут.)
                 </Grid>
                 <Grid xs={5}>
-
+                    <ToothListModal
+                        value={otherState.rootresrisk}
+                        field={'rootresrisk'}
+                        setVal={handleArrayChange}
+                    />
                 </Grid>
 
 
@@ -173,7 +199,11 @@ export default function Other() {
                     Ротиров. зубы с дефиц. кости (риск рецессий)
                 </Grid>
                 <Grid xs={5}>
-
+                    <ToothListModal
+                        value={otherState.rotrec}
+                        field={'rotrec'}
+                        setVal={handleArrayChange}
+                    />
                 </Grid>
 
 
@@ -254,14 +284,103 @@ export default function Other() {
                     Зубы, требующие эндодонтического лечения
                 </Grid>
                 <Grid xs={5}>
-                    <ToothList/>
+                    <ToothListModal
+                        value={otherState.endo}
+                        field='endo'
+                        setVal={handleArrayChange}
 
-                    {/*<DentalMapToggleButtons />*/}
+                    />
                 </Grid>
 
 
             </Grid>
-        </Box>
-    )
 
+
+            <Divider sx={{mt: 5, mb: 5}}/>
+
+            < Grid container spacing={2} border={1} borderColor={'lightgray'}>
+                <Grid xs={5}>
+                    Имплантаты, которые уже есть
+                </Grid>
+                <Grid xs={5} bgcolor={'#fff2cc'}>
+                    <DentalFormulaButtons
+                        value={otherState.impnow_up}
+                        field='impnow_up'
+                        setVal={handleArrayChange}
+                    />
+                </Grid>
+
+                <Grid xs={5}>
+                    Зубы на удаление по стоматологии
+                </Grid>
+                <Grid xs={5} bgcolor={'#fff2cc'}>
+                    <DentalFormulaButtons
+                        value={otherState.extu_up}
+                        field='extu_up'
+                        setVal={handleArrayChange}
+                    />
+                </Grid>
+
+                {otherState.extu_up.length ?
+                    <>
+                        <Grid xs={5}>
+                            Останется от удаляемого если не N
+                        </Grid>
+                        <Grid xs={5} bgcolor={'#fff2cc'}>
+                            input.....
+                        </Grid>
+                    </>
+                    : null
+                }
+
+
+                <Grid xs={5}>
+
+                </Grid>
+                <Grid xs={5} bgcolor={'#ffe797'}>
+
+                </Grid>
+
+                {otherState.extu_down.length ?
+                    <>
+                        <Grid xs={5}>
+                            Останется от удаляемого если не N
+                        </Grid>
+                        <Grid xs={5} bgcolor={'#fff2cc'}>
+                            input.....
+                        </Grid>
+                    </>
+                    : null
+                }
+
+                <Grid xs={5}>
+                    Зубы на удаление по стоматологии
+                </Grid>
+                <Grid xs={5} bgcolor={'#fff2cc'} justifyContent="center">
+                    <DentalFormulaButtons
+                        value={otherState.extu_down}
+                        field='extu_down'
+                        setVal={handleArrayChange}
+                    />
+                </Grid>
+
+                <Grid xs={5}>
+                    Имплантаты, которые уже есть
+                </Grid>
+                <Grid xs={5} bgcolor={'#fff2cc'} justifyContent="center">
+                    <DentalFormulaButtons
+                        value={otherState.impnow_down}
+                        field='impnow_down'
+                        setVal={handleArrayChange}
+                    />
+                </Grid>
+
+
+            </Grid>
+
+
+        </Box>
+
+
+    )
 }
