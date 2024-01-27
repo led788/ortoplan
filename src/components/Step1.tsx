@@ -7,7 +7,6 @@ import Anamnesis from './Anamnesis';
 import Face from './Face';
 import Smile from './Smile';
 import Tmj from './Tmj';
-import AppBar from '@mui/material/AppBar';
 import Other from './Other';
 
 interface TabPanelProps {
