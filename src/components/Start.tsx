@@ -17,7 +17,16 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Step1 from "./Step1.tsx";
-import {AirlineSeatReclineExtra, FormatListNumbered, HelpCenter, MonitorHeart, Summarize} from '@mui/icons-material';
+import {
+    AccountCircle,
+    AirlineSeatReclineExtra,
+    FormatListNumbered,
+    HelpCenter,
+    MonitorHeart,
+    Summarize
+} from '@mui/icons-material';
+import {Menu} from "@mui/material";
+import MenuItem from "@mui/material/MenuItem";
 
 const drawerWidth = 240;
 
@@ -119,9 +128,24 @@ export default function Start() {
                     >
                         <MenuIcon/>
                     </IconButton>
-                    <Typography variant="h6" noWrap component="div">
+                    <Typography variant="h6" noWrap component="div" sx={{flexGrow: 1}}>
                         Ortoplanner
                     </Typography>
+
+                    <div>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            // onClick={handleMenu}
+                            color="inherit"
+                            sx={{}}
+                        >
+                            <AccountCircle/>
+                        </IconButton>
+                    </div>
+
                 </Toolbar>
             </AppBar>
             <Drawer variant="permanent" open={open}>
