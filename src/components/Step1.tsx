@@ -55,7 +55,7 @@ export default function Step1() {
 
         <Box sx={{width: '100%'}}>
             <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
-                <AppBar position="static" color={"primary"}>
+                {/*<AppBar position="static" color={"primary"}>*/}
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"
                           indicatorColor="secondary"
                           textColor="inherit">
@@ -65,7 +65,7 @@ export default function Step1() {
                         <Tab label="ЦС, ВНЧС, ФУНКЦИЯ" {...a11yProps(3)} />
                         <Tab label="ДРУГОЕ" {...a11yProps(4)} />
                     </Tabs>
-                </AppBar>
+                {/*</AppBar>*/}
             </Box>
 
             <CustomTabPanel value={value} index={0}>
