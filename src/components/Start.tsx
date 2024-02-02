@@ -25,6 +25,7 @@ import {
     MonitorHeart,
     Summarize
 } from '@mui/icons-material';
+import {useNavigate} from "react-router-dom";
 
 
 const drawerWidth = 240;
@@ -102,6 +103,8 @@ export default function Start() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
+    const navigate = useNavigate();
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -163,6 +166,7 @@ export default function Start() {
                                 justifyContent: open ? 'initial' : 'center',
                                 px: 2.5,
                             }}
+
                         >
                             <ListItemIcon
                                 sx={{
@@ -170,6 +174,7 @@ export default function Start() {
                                     mr: open ? 3 : 'auto',
                                     justifyContent: 'center',
                                 }}
+                                onClick={()=>navigate('login')}
                             >
                                 <AirlineSeatReclineExtra/>
                             </ListItemIcon>
@@ -178,7 +183,7 @@ export default function Start() {
                     </ListItem>
 
 
-                    <ListItem key={1} disablePadding sx={{display: 'block'}}>
+                    <ListItem key={2} disablePadding sx={{display: 'block'}}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -200,7 +205,7 @@ export default function Start() {
                     </ListItem>
 
 
-                    <ListItem key={1} disablePadding sx={{display: 'block'}}>
+                    <ListItem key={3} disablePadding sx={{display: 'block'}}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -222,7 +227,7 @@ export default function Start() {
                     </ListItem>
 
 
-                    <ListItem key={1} disablePadding sx={{display: 'block'}}>
+                    <ListItem key={4} disablePadding sx={{display: 'block'}}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,
@@ -243,10 +248,59 @@ export default function Start() {
                         </ListItemButton>
                     </ListItem>
 
+
+                    <ListItem key={5} disablePadding sx={{display: 'block'}}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <Summarize/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Планирование'} sx={{opacity: open ? 1 : 0}}/>
+                        </ListItemButton>
+                    </ListItem>
+
+
+                    <ListItem key={6} disablePadding sx={{display: 'block'}}>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemIcon
+                                sx={{
+                                    minWidth: 0,
+                                    mr: open ? 3 : 'auto',
+                                    justifyContent: 'center',
+                                }}
+                            >
+                                <Summarize/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Служебные таблицы'} sx={{opacity: open ? 1 : 0}}/>
+                        </ListItemButton>
+                    </ListItem>
+
+
+
+
+
+
                 </List>
                 <Divider/>
                 <List>
-                    <ListItem key={1} disablePadding sx={{display: 'block'}}>
+                    <ListItem key={6} disablePadding sx={{display: 'block'}}>
                         <ListItemButton
                             sx={{
                                 minHeight: 48,

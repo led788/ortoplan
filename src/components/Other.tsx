@@ -9,7 +9,7 @@ import React from 'react';
 import {setArrayField, setField, StateFields} from "../store/otherSlice.ts";
 import {useAppDispatch, useAppSelector} from "../store/hooks.ts";
 import ToothListModal from "./ToothListModal.tsx";
-import {Divider, Hidden} from "@mui/material";
+import {Divider} from "@mui/material";
 import DentalFormulaButtons from "./DentalFormulaButtons.tsx";
 
 export default function Other() {

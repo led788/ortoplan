@@ -1,11 +1,10 @@
-import {Icon, TextField, Tooltip} from '@mui/material';
+import {TextField, Tooltip} from '@mui/material';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select, {SelectChangeEvent} from '@mui/material/Select';
 import Slider from '@mui/material/Slider';
 import Grid from '@mui/material/Unstable_Grid2';
-import React from 'react';
 import {useAppDispatch, useAppSelector} from "../store/hooks.ts";
 import {setField, setFieldBolton, StateFields} from "../store/smileSlice.ts";
 import {NumericFormat} from 'react-number-format';
@@ -329,8 +328,8 @@ export default function Smile() {
                         value={smileState.bolton}
                         // customInput={TextField}
                         customInput={CustomTextField}
-                        onValueChange={(values, sourceInfo) => {
-                            dispatch(setFieldBolton({field: 'bolton', value: values.floatValue}));
+                        onValueChange={(values) => {
+                            dispatch(setFieldBolton({field: 'bolton', value: values.floatValue || 0}));
                             console.log('bolton:', values.floatValue)
                         }}
                         allowNegative={false}
@@ -338,7 +337,8 @@ export default function Smile() {
                         decimalSeparator=","
                         isAllowed={(values) => {
                             const {floatValue} = values;
-                            return floatValue < 2.1
+
+                            return typeof floatValue !== 'undefined' && floatValue < 2.1
                         }}
                     />
                 </Grid>

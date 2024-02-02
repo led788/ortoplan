@@ -8,6 +8,7 @@ import Face from './Face';
 import Smile from './Smile';
 import Tmj from './Tmj';
 import Other from './Other';
+import {Paper} from "@mui/material";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -52,9 +53,11 @@ export default function Step1() {
 
     return (
 
-        <Box sx={{width: '100%'}}>
-            <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
-                {/*<AppBar position="static" color={"primary"}>*/}
+        <Paper elevation={3}>
+
+            {/*<Box sx={{width: '100%'}}>*/}
+                <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
+                    {/*<AppBar position="static" color={"primary"}>*/}
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example"
                           indicatorColor="secondary"
                           textColor="inherit">
@@ -64,24 +67,26 @@ export default function Step1() {
                         <Tab label="ЦС, ВНЧС, ФУНКЦИЯ" {...a11yProps(3)} />
                         <Tab label="ДРУГОЕ" {...a11yProps(4)} />
                     </Tabs>
-                {/*</AppBar>*/}
-            </Box>
+                    {/*</AppBar>*/}
+                </Box>
 
-            <CustomTabPanel value={value} index={0}>
-                <Anamnesis/>
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={1}>
-                <Face/>
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={2}>
-                <Smile/>
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={3}>
-                <Tmj/>
-            </CustomTabPanel>
-            <CustomTabPanel value={value} index={4}>
-                <Other/>
-            </CustomTabPanel>
-        </Box>
+                <CustomTabPanel value={value} index={0}>
+                    <Anamnesis/>
+                </CustomTabPanel>
+                <CustomTabPanel value={value} index={1}>
+                    <Face/>
+                </CustomTabPanel>
+                <CustomTabPanel value={value} index={2}>
+                    <Smile/>
+                </CustomTabPanel>
+                <CustomTabPanel value={value} index={3}>
+                    <Tmj/>
+                </CustomTabPanel>
+                <CustomTabPanel value={value} index={4}>
+                    <Other/>
+                </CustomTabPanel>
+            {/*</Box>*/}
+        </Paper>
+
     );
 }

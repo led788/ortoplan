@@ -13,7 +13,6 @@ const initialState = {
     antcrownl: 1,
     uincopt: 0,
     bolton: 0.0
-
 };
 
 type IState = typeof initialState;
@@ -27,8 +26,8 @@ const smileSlice = createSlice({
             state[action.payload.field] = action.payload.value;
         },
 
-        setFieldBolton: (state, action: PayloadAction<{ field: keyof typeof state, value: string }>) => {
-            state[action.payload.field] = parseFloat(action.payload.value);
+        setFieldBolton: (state, action: PayloadAction<{ field: keyof typeof state, value: number }>) => {
+            state[action.payload.field] = action.payload.value;
         },
     },
 });
